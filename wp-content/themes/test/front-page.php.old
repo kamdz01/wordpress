@@ -1,0 +1,66 @@
+<?php get_header(); ?>
+
+<h1>front page.php</h1>
+slider
+<?php 
+  $slider = new WP_Query(array(
+    'post_type' => 'slider'
+
+  ));
+
+  while($slider->have_posts()){
+    $slider->the_post();?>
+    
+    <article>
+      <h3><?php the_title();?></h3>
+      <img src="<?php the_field('slider_background') ?>" width="1800px" height="300px">
+      <?php the_content();?>
+      <a href="<?php the_field('slider_link') ?>">Sprawdż to</a>
+    </article>
+
+
+<?php } wp_reset_postdata();
+
+?>
+slider
+<hr>
+
+
+<?php 
+  $ogloszenia = new WP_Query(array(
+    'category_name' => 'ogloszenia'
+
+  ));
+
+  while($ogloszenia->have_posts()){
+    $ogloszenia->the_post();?>
+    
+    <article>
+      <h3><?php the_title();?></h3>
+      <?php the_content();?>
+    </article>
+
+
+<?php } wp_reset_postdata();
+
+?>
+
+
+<hr>
+
+<?php 
+
+  while ( have_posts() ) {
+    the_post(); 
+      ?>
+    <article>
+      <span><?php the_time('n.j.y');?></span>
+      <h2><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
+      <?php the_content();?>
+    </article>
+
+ <?php }
+
+?>
+
+<?php get_footer();?>
